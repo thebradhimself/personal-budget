@@ -8,21 +8,21 @@ moneyButton.addEventListener('click',function(){
   document.getElementById("money_left_over").innerHTML = "$ " + (totalMoney - totalBills);
 });
 
-var billInput = document.getElementById('money_lost0');
-var billInput1 = document.getElementById('money_lost1');
-var billInput2 = document.getElementById('money_lost2');
-var billInput3 = document.getElementById('money_lost3');
+
+
 var billButton = document.getElementById('money_lost_button');
 var totalBills = 0;
 
 billButton.addEventListener('click',function(){
 
-  totalBills += Number(billInput.value);
-  totalBills += Number(billInput1.value);
-  totalBills += Number(billInput2.value);
-  totalBills += Number(billInput3.value);
-  document.getElementById("money_going_out").innerHTML = "$ " + totalBills;
-  document.getElementById("money_left_over").innerHTML = "$ " + (totalMoney - totalBills);
+  for(var i = 0; i < totalBillsSoFar; i++){
+
+    var billInput = document.getElementById('money_lost['+ i +']');  
+
+    totalBills += Number(billInput.value);
+    document.getElementById("money_going_out").innerHTML = "$ " + totalBills;
+    document.getElementById("money_left_over").innerHTML = "$ " + (totalMoney - totalBills);
+  }
 });
 
 var addBillButton = document.getElementById('add_more_bills');
@@ -31,7 +31,7 @@ var totalBillsSoFar = 1;
 addBillButton.addEventListener('click', function(){
 
   var div = document.createElement("div");
-  div.innerHTML = '<input type="number" id="money_lost'+totalBillsSoFar+'" placeholder="Bill" />';
+  div.innerHTML = '<input type="number" id="money_lost['+totalBillsSoFar+']" placeholder="Bill" />';
   document.getElementById('the_bills').appendChild(div);
   totalBillsSoFar++;
 
